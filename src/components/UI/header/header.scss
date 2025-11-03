@@ -1,0 +1,38 @@
+@use "../../../styles/_variables" as*;
+
+.header {
+  background-image:
+    linear-gradient($color-black-70, $color-black-70),
+    url("../../../../public/header-background.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0 0 142px 0;
+
+  &__wrapper {
+    padding: 30px 0;
+    border-bottom: 1px solid $color-white-60;
+    margin: 0 0 108px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__button {
+    background-color: inherit;
+    border: none;
+    color: $color-white;
+    font-size: 16px;
+    line-height: 29px;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__title {
+    color: $color-white;
+    font-size: 48px;
+    line-height: 100%;
+    text-align: center;
+    margin: 0;
+  }
+}
