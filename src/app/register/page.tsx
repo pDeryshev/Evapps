@@ -19,6 +19,7 @@ export default function RegisterPage() {
                 name="email"
                 id="email"
                 label="Email"
+                placeholder="Email"
               />,
               <Input
                 key="password"
@@ -27,6 +28,7 @@ export default function RegisterPage() {
                 name="password"
                 id="password"
                 label="Пароль"
+                placeholder="Пароль"
               />,
               <Input
                 key="repeat-password"
@@ -35,13 +37,14 @@ export default function RegisterPage() {
                 name="repeat-password"
                 id="repeat-password"
                 label="Повторите пароль"
+                placeholder="Повторите пароль"
               />
             ]}
             buttons={[
               <Button
                 key="submit"
                 type="submit"
-                className="btn btn--acсent register__btn"
+                className="btn btn--accent register__btn"
                 text="Зарегистрироваться"
               />
             ]}

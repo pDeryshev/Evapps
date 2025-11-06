@@ -6,6 +6,4 @@ export interface IFormProps {
   buttons: ReactNode[];
   onSubmit?: (e: React.FormEvent) => void;
   className?: string;
-  inputWrapperClassName?: string;
-  buttonWrapperClassName?: string;
 }

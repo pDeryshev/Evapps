@@ -1,0 +1,49 @@
+@use "../../styles/_variables" as *;
+
+.custom-textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  grid-column: span 2;
+
+  &__label {
+    display: flex;
+    align-items: center;
+
+    p {
+      color: $color-black-85;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &__requred {
+    color: $color-dust-red;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__field {
+    border: 1px solid $color-light-gray;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 5px 12px;
+    width: 100%;
+
+    ::placeholder {
+      color: $color-black-25;
+    }
+  }
+
+  &__counter {
+    text-align: right;
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-black-25;
+  }
+}

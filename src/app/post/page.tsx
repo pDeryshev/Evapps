@@ -1,9 +1,15 @@
+"use client"
+
 import Image from "next/image";
 import "./post.scss";
 import "./comments.scss";
 import { Button } from "@/components/buttons/button";
+import { useNavigation } from "@/utils/hooks/useNavigation";
 
 export default function PostDetailPage() {
+
+  const { handleBack } = useNavigation();
+
   return (
     <div className="post">
       <div className="container">
@@ -83,20 +89,17 @@ export default function PostDetailPage() {
                 className="btn post__btn"
                 text="Назад"
                 type="button"
+                onClick={handleBack}
               />
               <Button
-                className="btn btn--acсent post__btn"
+                className="btn btn--accent post__btn"
                 text="Ваше впечатление об этом месте"
                 type="button"
               />
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   )
 }

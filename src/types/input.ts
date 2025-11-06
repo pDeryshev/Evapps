@@ -4,4 +4,5 @@ export interface IInput {
   name: string;
   id: string;
   label: string;
+  placeholder?: string;
 }

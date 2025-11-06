@@ -1,0 +1,28 @@
+@use "../../styles/_variables" as *;
+
+.photo-upload {
+  grid-column: span 2;
+
+  &__btn {
+    border: 1px solid $color-light-gray;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 5px 12px;
+    background-color: inherit;
+    cursor: pointer;
+  }
+
+  &__preview {
+    display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  
+  img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  }
+}
+

@@ -20,6 +20,7 @@ export default function LoginPage() {
                 name="email"
                 id="email"
                 label="Логин"
+                placeholder="Email"
               />,
               <Input
                 key="password"
@@ -28,12 +29,13 @@ export default function LoginPage() {
                 name="password"
                 id="password"
                 label="Пароль"
+                placeholder="Пароль"
               />
             ]}
             buttons={[
               <Link key="register" href="/register">
                 <Button
-                  type="submit"
+                  type="button"
                   className="btn login__btn"
                   text="Зарегистрироваться"
                 />
@@ -41,7 +43,7 @@ export default function LoginPage() {
               <Button
                 key="login"
                 type="submit"
-                className="btn btn--acсent login__btn"
+                className="btn btn--accent login__btn"
                 text="Войти"
               />
             ]}
