@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import "./header.scss";
+import { HeaderTitle } from "../header-title/headerTitle";
 
 export default function Header() {
 
@@ -17,9 +18,11 @@ export default function Header() {
               priority
             />
           </Link>
-          <button className="btn header__button">Войти</button>
+          <Link href="/login">
+          <button className="header__button">Войти</button>
+          </Link>
         </div>
-        <h1 className="header__title">Там, где мир начинается с путешествий</h1>
+        <HeaderTitle />
       </div> 
 
 

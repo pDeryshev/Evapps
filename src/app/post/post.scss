@@ -1,0 +1,44 @@
+@use "../../styles/_variables" as *;
+
+.post {
+  padding: 30px 0 60px;
+
+  &__wrapper {
+    border-radius: 10px;
+    background-color: $color-white;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    margin: 0 0 30px;
+  }
+
+  &__inner {
+    max-width: 967px;
+    margin: 0 auto;
+  }
+
+  &__content {
+    margin: 0 0 50px;
+  }
+
+  &__title {
+    margin: 0 0 15px;
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+
+  &__description {
+    margin: 0;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 119px;
+  }
+}

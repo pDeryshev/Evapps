@@ -6,7 +6,8 @@ export default function PostCard() {
   return (
     <div className="post-card">
       <Image
-        src="/"
+        className="post-card__image"
+        src="/logo-travel.png"
         alt="Фото из путешествия"
         width={370}
         height={288}
@@ -18,7 +19,7 @@ export default function PostCard() {
         </div>
         <div className="post-card__bottom">
           <span className="post-card__country">Италия, Венеция</span>
-          <Link className="post-card__link" href="#">
+          <Link className="post-card__link" href="/post">
             Подробнее
           </Link>
         </div>
