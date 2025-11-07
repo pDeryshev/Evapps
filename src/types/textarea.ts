@@ -6,5 +6,7 @@ export interface ITextarea {
   placeholder?: string;
   maxLength?: number;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (value: string) => void;
+  error?: string;
+  required?: boolean;
 }

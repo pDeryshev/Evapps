@@ -1,6 +1,6 @@
 import type { ITextarea } from "@/types/textarea"
 import "./textarea.scss"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export const Textarea = ({
   className,
@@ -9,15 +9,28 @@ export const Textarea = ({
   label,
   placeholder,
   maxLength,
-  ...props
+  value,
+  onChange,
+  error,
+  required
 }: ITextarea) => {
   const [charCount, setCharCount] = useState(0);
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCharCount(e.target.value.length);
+  // Обновляем счетчик символов при изменении value
+  useEffect(() => {
+    setCharCount(value?.length || 0);
+  }, [value]);
 
-    // Пробрасываем событие onChange если оно есть в props
-    props.onChange?.(e);
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value;
+    
+    // Проверяем максимальную длину
+    if (maxLength && newValue.length > maxLength) {
+      return;
+    }
+    
+    setCharCount(newValue.length);
+    onChange?.(newValue);
   }
 
   return (
@@ -26,19 +39,19 @@ export const Textarea = ({
         className={`${className}__label`}
         htmlFor={id}
       >
-        <span className={`${className}__requred`}>*</span>
+        {required && <span className={`${className}__requred`}>*</span>}
         <p>{label}</p>
       </label>
       }
       <div className={`${className}__inner`}>
         <textarea
-          className={`${className}__field`}
+          className={`${className}__field ${error ? `${className}__field--error` : ''}`}
           name={name}
           id={id}
           placeholder={placeholder}
           maxLength={maxLength}
+          value={value}
           onChange={handleChange}
-          {...props}
         />
         {maxLength && (
           <span className={`${className}__counter`}>
@@ -46,7 +59,7 @@ export const Textarea = ({
           </span>
         )}
       </div>
-
+      {error && <span className={`${className}__error`}>{error}</span>}
     </div>
   )
 }

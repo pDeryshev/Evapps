@@ -1,0 +1,94 @@
+@use "../../styles/_variables" as *;
+
+.user-profile {
+  padding: 16px 0 20px;
+
+  &__wrapper {
+    display: flex;
+    gap: 30px;
+
+  }
+
+  &__img {
+    border-radius: 10px;
+  }
+
+  &__remove-img {
+    text-decoration: underline;
+    background-color: inherit;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-dark-pear;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  &__info {
+    margin: 0 0 30px;
+  }
+
+  &__user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__name {
+    margin: 0 0 5px;
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: 600;
+  }
+
+  &__rename {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__city {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__city-descr {
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-black-85;
+  }
+
+  &__city-name {
+    font-size: 18px;
+    line-height: 18px;
+    color: $color-black;
+  }
+
+  &__about {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__about-me {
+    font-size: 14px;
+    line-height: 22px;
+    color: $color-black-85;
+  }
+
+  &__about-descr {
+    font-size: 16px;
+    line-height: 24px;
+    color: $color-black;
+  }
+}

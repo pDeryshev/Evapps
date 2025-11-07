@@ -1,27 +1,19 @@
+import { IPosts } from "@/types/api/posts";
 import PostCard from "../postCard/postCard";
 import "./postsList.scss";
 
-export default function PostsList() {
+interface PostsListProps {
+  posts: IPosts[]
+}
+
+export default function PostsList({ posts }: PostsListProps) {
   return (
     <ul className="posts__list">
-      <li className="posts__item">
-        <PostCard />
-      </li>
-      <li className="posts__item">
-        <PostCard />
-      </li>
-      <li className="posts__item">
-        <PostCard />
-      </li>
-      <li className="posts__item">
-        <PostCard />
-      </li>
-      <li className="posts__item">
-        <PostCard />
-      </li>
-      <li className="posts__item">
-        <PostCard />
-      </li>
+      {posts.map((post) => (
+        <li key={post.id} className="posts__item">
+          <PostCard post={post}/>
+        </li>
+      ))}
     </ul>
   )
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import type { IInput } from "@/types/input"
 import "./input.scss"
 
@@ -7,7 +9,11 @@ export const Input = ({
   name,
   id,
   label,
-  placeholder
+  placeholder,
+  value,
+  onChange,
+  error,
+  required
 }: IInput) => {
   return (
     <div className={className}>
@@ -15,15 +21,19 @@ export const Input = ({
         className={`${className}__label`}
         htmlFor={id}
       >
-        <span className={`${className}__requred`}>*</span>
+        {required && <span className={`${className}__requred`}>*</span>}
         <p>{label}</p>
       </label>
       <input
-        className={`${className}__field`}
-        type={type} name={name}
+        className={`${className}__field ${error ? `${className}__field--error` : ''}`}
+        type={type}
+        name={name}
         id={id}
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
       />
+      {error && <span className={`${className}__error`}>{error}</span>}
     </div>
   )
 }
