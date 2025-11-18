@@ -5,14 +5,12 @@ import { Input } from "@/components/input/input";
 import { Form } from "@/components/form/form";
 import Link from "next/link";
 import "./login.scss";
-import { useNavigation } from "@/utils/hooks/useNavigation";
 import { authAPI } from "@/api/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/utils/hooks/useAuth";
 
 export default function LoginPage() {
-  const { handleBack } = useNavigation();
   const { login } = useAuth();
   const router = useRouter();
 
@@ -67,29 +65,29 @@ export default function LoginPage() {
 
     try {
       const response = await authAPI.login(formData);
-      
+
       // Сохраняем данные пользователя
       login(response.user, response.token);
-      
+
       // Перенаправляем на главную страницу
       router.push('/');
     } catch (error: any) {
       console.error('Login error:', error);
-      
+
       if (error.response?.status === 401) {
         setErrors({ submit: "Неверный email или пароль" });
       } else if (error.response?.status === 422) {
         // Обработка ошибок валидации
         const serverErrors = error.response.data.errors;
         const newErrors: { [key: string]: string } = {};
-        
+
         if (serverErrors.email) {
           newErrors.email = serverErrors.email[0];
         }
         if (serverErrors.password) {
           newErrors.password = serverErrors.password[0];
         }
-        
+
         setErrors(newErrors);
       } else {
         setErrors({ submit: "Ошибка при входе. Попробуйте еще раз." });
@@ -129,14 +127,13 @@ export default function LoginPage() {
   ];
 
   const formButtons = [
-    <Button
-      key="back"
-      type="button"
-      className="btn login__btn"
-      text="Назад"
-      onClick={handleBack}
-      disabled={loading}
-    />,
+    <Link href="/register" key="register">
+      <Button
+        type="button"
+        className="btn login__btn"
+        text="Зарегистрироваться"
+      />
+    </Link>,
     <Button
       key="login"
       type="submit"
@@ -157,11 +154,6 @@ export default function LoginPage() {
             buttons={formButtons}
             onSubmit={handleSubmit}
           />
-
-          <div className="login__register-link">
-            Нет аккаунта? <Link href="/register">Зарегистрироваться</Link>
-          </div>
-
           {errors.submit && (
             <div className="login__error">
               {errors.submit}

@@ -1,12 +1,5 @@
 import { IPosts, IPostDetail, IGetPostsParams } from "../types/api/posts";
-
-// Разделяем URL для API и изображений
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ? 
-  `${process.env.NEXT_PUBLIC_API_URL}/api` : 
-  'https://travelblog.skillbox.cc/api';
-
-const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
-  'https://travelblog.skillbox.cc';
+import { BASE_URL } from "./baseUrl";
 
 // Функции для работы с постами (серверные)
 export const postsServerAPI = {
@@ -14,7 +7,7 @@ export const postsServerAPI = {
   getPosts: async (params?: IGetPostsParams): Promise<IPosts[]> => {
     try {
       const queryString = params ? new URLSearchParams(params as any).toString() : '';
-      const url = `${API_BASE_URL}/posts${queryString ? `?${queryString}` : ''}`;
+      const url = `${BASE_URL}/api/posts${queryString ? `?${queryString}` : ''}`;
       
       const response = await fetch(url, {
         cache: 'no-store',
@@ -38,7 +31,7 @@ export const postsServerAPI = {
   // Получение конкретного поста
   getPost: async (id: number): Promise<IPostDetail | null> => {
     try {
-      const url = `${API_BASE_URL}/posts/${id}`;     
+      const url = `${BASE_URL}/api/posts/${id}`;     
       const response = await fetch(url, {
         cache: 'no-store',
         headers: {
@@ -58,6 +51,3 @@ export const postsServerAPI = {
     }
   },
 };
-
-// Экспортируем BASE URL для изображений
-export { IMAGE_BASE_URL };

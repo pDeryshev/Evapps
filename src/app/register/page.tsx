@@ -1,19 +1,15 @@
-// app/register/page.tsx
 "use client";
 
 import { Button } from "@/components/buttons/button";
 import { Input } from "@/components/input/input";
 import "./register.scss";
 import { Form } from "@/components/form/form";
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { authAPI } from "@/api/auth";
 import { useAuth } from "@/utils/hooks/useAuth";
-import { useNavigation } from "@/utils/hooks/useNavigation";
 
 export default function RegisterPage() {
-  const { handleBack } = useNavigation();
   const { login } = useAuth();
   const router = useRouter();
 
@@ -180,14 +176,6 @@ export default function RegisterPage() {
 
   const formButtons = [
     <Button
-      key="back"
-      type="button"
-      className="btn register__btn"
-      text="Назад"
-      onClick={handleBack}
-      disabled={loading}
-    />,
-    <Button
       key="submit"
       type="submit"
       className="btn btn--accent register__btn"
@@ -207,17 +195,11 @@ export default function RegisterPage() {
             buttons={formButtons}
             onSubmit={handleSubmit}
           />
-
-          <div className="register__login-link">
-            Уже есть аккаунт? <Link href="/login">Войти</Link>
-          </div>
-
           {successMessage && (
             <div className="register__success">
               {successMessage}
             </div>
-          )}
-          
+          )}         
           {errors.submit && (
             <div className="register__error">
               {errors.submit}

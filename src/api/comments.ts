@@ -1,27 +1,26 @@
-import { AxiosResponse } from "axios";
-import { apiClient } from "./baseUrl";
+import { IComments, ICreateCommentData } from "../types/api/comments";
 import { IApiResponse } from "@/types/api/posts";
-import { ICreateCommentData } from "@/types/api/comments";
+import { BASE_URL } from "./baseUrl";
+import handleFetch from "./handleFetch";
 
-// Функции для работы с комментариями
 export const commentsAPI = {
   // Получение комментариев поста
-  getComments: async (postId: number): Promise<IApiResponse<Comment[]>> => {
-    const response: AxiosResponse<Comment[]> = await apiClient.get(`/posts/${postId}/comments`);
-    return {
-      data: response.data,
-      status: response.status,
-      statusText: response.statusText,
-    };
+  getComments: async (postId: number): Promise<IApiResponse<IComments[]>> => {
+    const url = `${BASE_URL}/api/posts/${postId}/comments`;
+    
+    return handleFetch<IComments[]>(url, {
+      method: 'GET',
+      cache: 'no-store',
+    });
   },
 
   // Добавление комментария
-  addComment: async (postId: number, data: ICreateCommentData): Promise<IApiResponse<Comment>> => {
-    const response: AxiosResponse<Comment> = await apiClient.post(`/posts/${postId}/comments`, data);
-    return {
-      data: response.data,
-      status: response.status,
-      statusText: response.statusText,
-    };
+  addComment: async (postId: number, data: ICreateCommentData): Promise<IApiResponse<IComments>> => {
+    const url = `${BASE_URL}/api/posts/${postId}/comments`;
+    
+    return handleFetch<IComments>(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
   },
 };

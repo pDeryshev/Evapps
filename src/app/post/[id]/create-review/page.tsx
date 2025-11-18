@@ -17,7 +17,7 @@ export default function CreateReviewPage() {
   const postId = Number(params.id);
 
   const [formData, setFormData] = useState({
-    author_name: "",
+    full_name: "",
     comment: ""
   });
   const [loading, setLoading] = useState(false);
@@ -41,8 +41,8 @@ export default function CreateReviewPage() {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.author_name.trim()) {
-      newErrors.author_name = "Введите ваше имя";
+    if (!formData.full_name.trim()) {
+      newErrors.full_name = "Введите ваше имя";
     }
 
     if (!formData.comment.trim()) {
@@ -82,15 +82,15 @@ export default function CreateReviewPage() {
 
   const formInputs = [
     <Input
-      key="author_name"
+      key="full_name"
       className="custom-input"
       type="text"
-      name="author_name"
-      id="author_name"
+      name="full_name"
+      id="full_name"
       label="Ваше имя"
       placeholder="Ваше имя"
-      value={formData.author_name}
-      onChange={(value) => handleInputChange("author_name", value)}
+      value={formData.full_name}
+      onChange={(value) => handleInputChange("full_name", value)}
       error={errors.author_name}
       required
     />,

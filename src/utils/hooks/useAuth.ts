@@ -11,10 +11,11 @@ export const useAuth = () => {
     // Проверяем, есть ли пользователь в localStorage при загрузке
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('auth-token');
+    console.log('useAuth init - storedUser:', storedUser, 'storedToken:', storedToken);
     
     if (storedUser && storedToken) {
       try {
-        setUser(JSON.parse(storedUser));
+        setUser(JSON.parse(storedToken));
       } catch (error) {
         console.error('Error parsing user data:', error);
         logout();

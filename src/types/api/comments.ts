@@ -5,6 +5,6 @@ export interface IComments {
 }
 
 export interface ICreateCommentData {
-  author_name: string;
+  full_name: string;
   comment: string;
 }
