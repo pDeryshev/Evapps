@@ -3,8 +3,8 @@ import "./button.scss"
 
 export const Button = ({
   className,
-  text,
   type,
+  children,
   ...props
 }: IButton) => {
   return (
@@ -13,7 +13,7 @@ export const Button = ({
       className={className}
       {...props}
     >
-      {text}
+      {children}
     </button>
   )
 }

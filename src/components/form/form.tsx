@@ -8,6 +8,7 @@ export const Form = ({
   buttons,
   onSubmit,
   className = '',
+  children
 }: IFormProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -33,6 +34,7 @@ export const Form = ({
           {buttons}
         </div>
       )}
+      {children}
     </form>
   );
 };

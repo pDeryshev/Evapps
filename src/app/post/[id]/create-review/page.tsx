@@ -114,17 +114,15 @@ export default function CreateReviewPage() {
       key="back"
       type="button"
       className="btn login__btn"
-      text="Назад"
       onClick={handleBack}
       disabled={loading}
-    />,
+    >Назад</Button>,
     <Button
       key="save"
       type="submit"
       className="btn btn--accent login__btn"
-      text={loading ? "Сохранение..." : "Сохранить"}
       disabled={loading}
-    />
+    >{loading ? "Сохранение..." : "Сохранить"}</Button>
   ];
 
   return (

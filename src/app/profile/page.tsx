@@ -1,8 +1,34 @@
+"use client"
+
 import { Button } from "@/components/buttons/button";
 import Image from "next/image";
 import "./profile.scss";
+import { useAuth } from "@/utils/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import RemoveIcon from "../../../public/icon/RemoveIcon";
+import Link from "next/link";
+import AddPhotoIcon from "../../../public/icon/AddPhotoIcon";
 
 export default function UserProfilePage() {
+  const { user, isAuthenticated, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [loading, isAuthenticated, router]);
+
+  if (loading) {
+    return <div className="profile__loading">Загрузка...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
+  console.log(user);
+
   return (
     <div className="user-profile">
       <div className="container">
@@ -15,32 +41,32 @@ export default function UserProfilePage() {
             width={240}
             height={240}
            />
-           <Button 
-           className="user-profile__remove-img"
-           text="Изменить фото"
-           type="button"
-           />
+           <Button
+              className="user-profile__remove-img"
+              type="button"
+            >
+              <AddPhotoIcon className="user-profile__photo-icon" />
+              Изменить фото
+            </Button>
           </div>
           <div className="user-profile__description">
             <div className="user-profile__info">
               <div className="user-profile__user-info">
-                <h1 className="user-profile__name">Боярская Варвара Михайловна</h1>
-                <Button
-                  className="user-profile__rename"
-                  text="Ик"
-                  type="button"
+                <h1 className="user-profile__name">{user?.full_name}</h1>
+                <Link href="/profile/edit"
                 >
-                </Button>
+                  <RemoveIcon 
+                  className="user-profile__rename-icon"/>
+                </Link>
               </div>
               <div className="user-profile__city">
                 <span className="user-profile__city-descr">Город:</span>
-                <span className="user-profile__city-name">Вышний Волчёк</span>
+                <span className="user-profile__city-name">{user?.city}</span>
               </div>
             </div>
             <div className="user-profile__about">
               <span className="user-profile__about-me">О себе:</span>
-              <p className="user-profile__about-descr">Я обожаю путешествовать. Мне нравится открывать для себя новые места, знакомиться с разными культурами и традициями. Я всегда готова отправиться в путь, даже если это означает покинуть зону комфорта. В дороге я встречаю новых людей, учусь новому и наслаждаюсь красотами природы. Путешествия дают мне возможность расширить свой кругозор и узнать больше о мире вокруг меня.
-                Я уверена, что каждый новый опыт делает меня сильнее и мудрее.</p>
+              <p className="user-profile__about-descr">{user?.bio}</p>
             </div>
           </div>
         </div>

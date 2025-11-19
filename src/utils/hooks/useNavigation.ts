@@ -9,8 +9,13 @@ export const useNavigation = () => {
     router.back();
   };
 
+  const handleProfile = () => {
+    router.push('/profile')
+  }
+
   return {
     handleBack,
+    handleProfile,
     router
   };
 };

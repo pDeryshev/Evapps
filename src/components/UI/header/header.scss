@@ -40,4 +40,47 @@
       margin: 0 0 122px;
     }
   }
+
+  &__user-menu {
+    position: relative;
+  }
+
+  &__user-button {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    background-color: inherit;
+    color: $color-white;
+    border: none;
+    font-size: 16px;
+    line-height: 29px;
+    cursor: pointer;
+  }
+
+  &__dropdown {
+    display: flex;
+    flex-direction: column;
+    max-width: max-content;
+    gap: 4px;
+    background-color: $color-white;
+    padding: 8px;
+    border-radius: 2px;    
+    position: absolute;
+    top: 30px;
+    right: 0;
+  }
+
+  &__dropdown-item {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: inherit;
+    color: $color-signal-black;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 22px;
+  }
 }

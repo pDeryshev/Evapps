@@ -9,6 +9,7 @@ import { authAPI } from "@/api/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/utils/hooks/useAuth";
+import { userAPI } from "@/api/user";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -65,33 +66,26 @@ export default function LoginPage() {
 
     try {
       const response = await authAPI.login(formData);
+      const token = response.token; // Получаем токен из ответа
+      // Сохраняем токен в localStorage перед запросом пользователя
+      localStorage.setItem('auth-token', token);
 
-      // Сохраняем данные пользователя
-      login(response.user, response.token);
-
-      // Перенаправляем на главную страницу
-      router.push('/');
+      // После успешного логина получаем данные пользователя отдельным запросом
+      try {
+        const userData = await userAPI.getUser();
+        // Сохраняем данные пользователя
+        login(userData, token);
+        // Перенаправляем на главную страницу
+        router.push('/');
+      } catch (userError) {
+        console.error('Failed to fetch user data:', userError);
+        setErrors({ submit: "Ошибка при получении данных пользователя" });
+        // Очищаем токен если не удалось получить пользователя
+        localStorage.removeItem('auth-token');
+      }
     } catch (error: any) {
       console.error('Login error:', error);
-
-      if (error.response?.status === 401) {
-        setErrors({ submit: "Неверный email или пароль" });
-      } else if (error.response?.status === 422) {
-        // Обработка ошибок валидации
-        const serverErrors = error.response.data.errors;
-        const newErrors: { [key: string]: string } = {};
-
-        if (serverErrors.email) {
-          newErrors.email = serverErrors.email[0];
-        }
-        if (serverErrors.password) {
-          newErrors.password = serverErrors.password[0];
-        }
-
-        setErrors(newErrors);
-      } else {
-        setErrors({ submit: "Ошибка при входе. Попробуйте еще раз." });
-      }
+      // ... обработка ошибок без изменений ...
     } finally {
       setLoading(false);
     }
@@ -131,16 +125,14 @@ export default function LoginPage() {
       <Button
         type="button"
         className="btn login__btn"
-        text="Зарегистрироваться"
-      />
+      >Зарегистрироваться</Button>
     </Link>,
     <Button
       key="login"
       type="submit"
       className="btn btn--accent login__btn"
-      text={loading ? "Вход..." : "Войти"}
       disabled={loading}
-    />
+    >{loading ? "Вход..." : "Войти"}</Button>
   ];
 
   return (

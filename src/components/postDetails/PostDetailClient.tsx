@@ -7,6 +7,7 @@ import { IPostDetail } from "@/types/api/posts";
 import { useRouter } from "next/navigation";
 import "./post.scss";
 import "./comments.scss";
+import { useAuth } from "@/utils/hooks/useAuth";
 
 interface PostDetailClientProps {
   post: IPostDetail;
@@ -14,6 +15,7 @@ interface PostDetailClientProps {
 
 export default function PostDetailClient({ post }: PostDetailClientProps) {
   const { handleBack } = useNavigation();
+  const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   const getImageUrl = (photoPath: string) => {
@@ -52,7 +54,7 @@ export default function PostDetailClient({ post }: PostDetailClientProps) {
             <div className="post__content">
               <h1 className="post__title">{post.title}</h1>
               <p className="post__description">{post.description}</p>
-            </div>           
+            </div>
             <ul className="comments">
               {post.comments && post.comments.map((comment, index) => (
                 <li key={index} className="comments__item">
@@ -64,7 +66,7 @@ export default function PostDetailClient({ post }: PostDetailClientProps) {
                 </li>
               ))}
             </ul>
-            
+
             <div className="post__buttons">
               <Button
                 className="btn post__btn"
@@ -72,12 +74,14 @@ export default function PostDetailClient({ post }: PostDetailClientProps) {
                 type="button"
                 onClick={handleBack}
               />
-              <Button
-                className="btn btn--accent post__btn"
-                text="Ваше впечатление об этом месте"
-                type="button"
-                onClick={() => router.push(`/post/${post.id}/create-review`)}
-              />
+              {isAuthenticated ? (
+                <Button
+                  className="btn btn--accent post__btn"
+                  text="Ваше впечатление об этом месте"
+                  type="button"
+                  onClick={() => router.push(`/post/${post.id}/create-review`)}
+                />
+              ) : (<></>)}
             </div>
           </div>
         </div>

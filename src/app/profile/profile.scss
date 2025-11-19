@@ -27,6 +27,12 @@
     line-height: 24px;
     cursor: pointer;
     outline: none;
+    gap: 6px;
+  }
+
+  &__description {
+   flex-grow: 2;
+   max-width: 840px;
   }
 
   &__info {
@@ -35,14 +41,14 @@
 
   &__user-info {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
   }
 
   &__name {
     margin: 0 0 5px;
     font-size: 36px;
-    line-height: 36px;
+    line-height: 49px;
     font-weight: 600;
   }
 
@@ -58,6 +64,10 @@
     justify-content: center;
   }
 
+  &__rename-icon {
+    color: $color-semiligth-gray;
+  }
+
   &__city {
     display: flex;
     flex-direction: column;
@@ -71,7 +81,7 @@
 
   &__city-name {
     font-size: 18px;
-    line-height: 18px;
+    line-height: 26px;
     color: $color-black;
   }
 
@@ -90,5 +100,6 @@
     font-size: 16px;
     line-height: 24px;
     color: $color-black;
+    margin: 0;
   }
 }

@@ -1,25 +1,19 @@
+import { User } from "./user";
+
 export interface LoginData {
   email: string;
   password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 export interface RegisterData {
   email: string;
   password: string;
   password_confirmation: string;
-}
-
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface LoginResponse {
-  user: User;
-  token: string;
 }
 
 export interface RegisterResponse {
@@ -35,3 +29,4 @@ export interface ErrorResponse {
     password_confirmation?: string[];
   };
 }
+

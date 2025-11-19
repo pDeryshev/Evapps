@@ -71,15 +71,13 @@ export default function CreatePostPage() {
                 key="back"
                 type="button"
                 className="btn login__btn"
-                text="Назад"
                 onClick={handleBack}
-              />,
+              >Назад</Button>,
               <Button
                 key="save"
                 type="submit"
                 className="btn btn--accent login__btn"
-                text="Сохранить"
-              />
+              >Сохранить</Button>
             ]}
           />
         </div>
